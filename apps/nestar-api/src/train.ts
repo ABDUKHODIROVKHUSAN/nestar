@@ -1,4 +1,4 @@
-// MIT TASK ZJ
+// MIT TASK ZJ 1
 
 function reduceNestedArray(arr: any[]): number {
   let sum = 0;
