@@ -6,7 +6,7 @@ export enum MemberType {
   ADMIN = 'ADMIN',
 }
 
-registerEnumType(MemberType, {
+registerEnumType(MemberType, {   // GraphQL uchun
   name: 'MemberType',
 });
 
