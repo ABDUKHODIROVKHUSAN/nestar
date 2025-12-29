@@ -29,8 +29,8 @@ export class MemberInput {
     memberAuthType?: MemberAuthType; 
    } 
 
-    @InputType()
-   export class LoginInput {
+@InputType()
+export class LoginInput {
     @IsNotEmpty()
     @Length(3, 12)
     @Field(() => String)
