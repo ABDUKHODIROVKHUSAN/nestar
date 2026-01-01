@@ -4,14 +4,17 @@ import { InternalServerErrorException, UsePipes, ValidationPipe } from '@nestjs/
 import { LoginInput, MemberInput } from '../../libs/DTO/member/member.input';
 import { Member } from '../../libs/DTO/member/member';
 
-@Resolver()
+@Resolver()  
+// @UsePipes(ValidationPipe) - we could've use validation here to apply all the methods
+
+// Dependency Injection (DI).
 export class MemberResolver {
   constructor(
     private readonly memberService: MemberService,
   ) {}
 
   @Mutation(() => Member)
-  @UsePipes(ValidationPipe)
+  @UsePipes(ValidationPipe) // Validation is being integrated to this method
   public async signup(@Args('input') input: MemberInput ): Promise<Member> {
     try {
        console.log('Mutation: signup');

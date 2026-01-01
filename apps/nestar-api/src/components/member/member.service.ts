@@ -12,6 +12,8 @@ export class MemberService {
 
     public async signup(input: MemberInput): Promise<Member> {
         // TODO : Hash password
+        // Here we did not used to use try and catch but here to customize the 
+        // error we are using 1 
        try {  
         const result = await this.memberModel.create(input);
         // TODO: Authentication via TOKEN
