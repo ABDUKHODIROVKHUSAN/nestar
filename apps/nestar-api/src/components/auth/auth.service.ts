@@ -1,8 +1,13 @@
 import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
+import { T } from '../../libs/types/common';
+import { Member } from '../../libs/DTO/member/member';
 
 @Injectable()
 export class AuthService {
+  constructor(private jwtService: JwtService) {}
+
   public async hashPassword(memberPassword: string): Promise<string> {
     const salt = await bcrypt.genSalt();
     return await bcrypt.hash(memberPassword, salt);
@@ -14,4 +19,21 @@ export class AuthService {
   ): Promise<boolean> {
     return await bcrypt.compare(password, hashedPassword);
   }
+
+  public async createToken(member: Member): Promise<string> {
+    console.log('member:', member);
+    const payload: T = {}; // payload encoding proccess
+    Object.keys(member['_doc'] ? member['_doc'] : member).map((ele) => {
+        payload[`${ele}`] = member[`${ele}`];
+    });
+    delete payload.memberPassword;
+    console.log('paylaod:', payload);
+
+    return await this.jwtService.signAsync(payload); // jibrish string proccess (none can see)
+
+}
+    public async verifyToken(token: string): Promise<Member>{ // accepts the token and return the value of member(payload)
+        const member = await this.jwtService.verifyAsync(token);
+        return member;
+    }  
 }

@@ -4,9 +4,6 @@ import { LoginInput, MemberInput } from '../../libs/DTO/member/member.input';
 import { Member } from '../../libs/DTO/member/member';
 
 @Resolver()  
-// @UsePipes(ValidationPipe) - we could've use validation here to apply all the methods
-
-// Dependency Injection (DI).
 export class MemberResolver {
   constructor(
     private readonly memberService: MemberService,
