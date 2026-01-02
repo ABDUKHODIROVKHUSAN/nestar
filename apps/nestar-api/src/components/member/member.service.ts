@@ -5,15 +5,16 @@ import { Member } from '../../libs/DTO/member/member';
 import { LoginInput, MemberInput } from '../../libs/DTO/member/member.input';
 import { Message } from '../../libs/enums/common.enum';
 import { MemberStatus } from '../../libs/enums/member.enum';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class MemberService {
-    constructor(@InjectModel('Member') private readonly memberModel: Model<Member>) {}
+    constructor(@InjectModel('Member') private readonly memberModel: Model<Member>,
+    private authService: AuthService,
+) {}
 
     public async signup(input: MemberInput): Promise<Member> {
-        // TODO : Hash password
-        // Here we did not used to use try and catch but here to customize the 
-        // error we are using 1 
+        input.memberPassword = await this.authService.hashPassword(input.memberPassword);
        try {  
         const result = await this.memberModel.create(input);
         // TODO: Authentication via TOKEN
@@ -39,7 +40,7 @@ export class MemberService {
     }
 
     // TODO: Compare passwords
-    const isMatch = memberPassword === response.memberPassword;
+    const isMatch = await this.authService.comparePasswords(input.memberPassword, response.memberPassword);
     if (!isMatch)
         throw new InternalServerErrorException(Message.WRONG_PASSWORD);
 
