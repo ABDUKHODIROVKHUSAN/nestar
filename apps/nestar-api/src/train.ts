@@ -1,12 +1,23 @@
-// MIT TASK ZL
-function stringToKebab(text: string): string {
-  return text
-    .toLowerCase()        
-    .trim()              
-    .split(' ')          
-    .join('-');         
+// MIT TASK ZN
+
+function rotateArray(arr: number[], index: number): number[] {
+  const firstPart = arr.slice(0, index);
+  const secondPart = arr.slice(index);
+  return [...secondPart, ...firstPart];
 }
-console.log(stringToKebab("I love Kebab")); 
+console.log(rotateArray([1, 2, 3, 4, 5, 6], 3));
+
+
+
+// MIT TASK ZL
+// function stringToKebab(text: string): string {
+//   return text
+//     .toLowerCase()        
+//     .trim()              
+//     .split(' ')          
+//     .join('-');         
+// }
+// console.log(stringToKebab("I love Kebab")); 
 
 
 // TASK ZM
