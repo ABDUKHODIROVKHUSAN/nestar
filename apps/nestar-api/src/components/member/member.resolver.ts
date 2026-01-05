@@ -11,6 +11,7 @@ import { Roles } from '../auth/decorators/roles.decorator';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { MemberUpdate } from '../../libs/DTO/member/memberUpdate';
 import { shapeIntoMongoObjectId } from '../../libs/config';
+import { WithoutGuard } from '../auth/guards/without.guard';
 
 @Resolver()  
 export class MemberResolver {
@@ -65,15 +66,15 @@ export class MemberResolver {
   }
 
  
-
+  @UseGuards(WithoutGuard)
   @Query(() => Member)
   public async getMember(
-    @Args('memberId') input: string,
-  ): Promise<Member> {
-    console.log('Query: getMember');
-    const targetId = shapeIntoMongoObjectId(input);
-    return this.memberService.getMember(targetId);
-  }
+    @Args('memberId') input: string, @AuthMember('_id') memberId: ObjectId): Promise<Member> {
+      console.log('Query: getMember');
+      const targetId = shapeIntoMongoObjectId(input);
+      return this.memberService.getMember(memberId, targetId);
+    }
+ 
     // Authorization: ADMIN
   @Mutation(() => String)
   public async getAllMembersByAdmin(): Promise<string> {
