@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ViewService } from './view.service';
-import { View } from '../../libs/DTO/view/view';
 import ViewSchema from '../../schemas/View.model';
+import { View } from '../../libs/DTO/view/view';
 
 
 @Module({
