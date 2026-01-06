@@ -1,11 +1,20 @@
+// MIT TASK
+
+function areArraysEqual(arr1: number[], arr2: number[]): boolean {
+  return arr1.every(item => arr2.includes(item));
+}
+areArraysEqual([1, 2, 3], [3, 1, 2]);       
+areArraysEqual([1, 2, 3], [3, 1, 2, 1]);    
+areArraysEqual([1, 2, 3], [4, 1, 2]);       
+
 // MIT TASK ZN
 
-function rotateArray(arr: number[], index: number): number[] {
-  const firstPart = arr.slice(0, index);
-  const secondPart = arr.slice(index);
-  return [...secondPart, ...firstPart];
-}
-console.log(rotateArray([1, 2, 3, 4, 5, 6], 3));
+// function rotateArray(arr: number[], index: number): number[] {
+//   const firstPart = arr.slice(0, index);
+//   const secondPart = arr.slice(index);
+//   return [...secondPart, ...firstPart];
+// }
+// console.log(rotateArray([1, 2, 3, 4, 5, 6], 3));
 
 
 
