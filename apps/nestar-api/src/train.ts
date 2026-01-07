@@ -1,11 +1,30 @@
+// MIT TASK ZP
+function groupAnagrams(strs: string[]): string[][] {
+  const map: Record<string, string[]> = {};
+  for (const word of strs) {
+    const key = word.split('').sort().join('');
+    if (!map[key]) {
+      map[key] = [];
+    }
+    map[key].push(word);
+  }
+  return Object.values(map);
+}
+
+const strs = ["eat", "tea", "tan", "ate", "nat", "bat"];
+const result = groupAnagrams(strs);
+console.log(result);
+
+
+
 // MIT TASK
 
-function areArraysEqual(arr1: number[], arr2: number[]): boolean {
-  return arr1.every(item => arr2.includes(item));
-}
-areArraysEqual([1, 2, 3], [3, 1, 2]);       
-areArraysEqual([1, 2, 3], [3, 1, 2, 1]);    
-areArraysEqual([1, 2, 3], [4, 1, 2]);       
+// function areArraysEqual(arr1: number[], arr2: number[]): boolean {
+//   return arr1.every(item => arr2.includes(item));
+// }
+// areArraysEqual([1, 2, 3], [3, 1, 2]);       
+// areArraysEqual([1, 2, 3], [3, 1, 2, 1]);    
+// areArraysEqual([1, 2, 3], [4, 1, 2]);       
 
 // MIT TASK ZN
 
