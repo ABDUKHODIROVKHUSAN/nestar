@@ -126,7 +126,7 @@ export class MemberService {
   return result[0];
 }
 
-   public async getAllMembersByAdmin(input: MembersInquiry): Promise<Member> {
+  public async getAllMembersByAdmin(input: MembersInquiry): Promise<Member> {
   const { memberStatus, memberType, text } = input.search;
   const match: T = {};
   const sort: T = { [input?.sort ?? 'createdAt']: input?.direction ?? Direction.DESC };
@@ -143,7 +143,7 @@ export class MemberService {
       {
         $facet: {
           list: [{ $skip: (input.page - 1) * input.limit }, { $limit: input.limit }],
-          metaCounter: [{ $count: 'total' }],
+          metaCounter: [{ $count: 'total' }], // ignores pagination, return total number of matching docs
         },
       },
     ])
