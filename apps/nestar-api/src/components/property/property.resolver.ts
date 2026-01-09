@@ -5,8 +5,8 @@ import { AuthMember } from '../auth/decorators/authMember.decorator';
 import { ObjectId } from 'mongoose';
 import { MemberType } from '../../libs/enums/member.enum';
 import { PropertyService } from './property.service';
-import { PropertyInput } from '../../libs/DTO/property/property.input';
-import { Property } from '../../libs/DTO/property/property';
+import { PropertiesInquiry, PropertyInput } from '../../libs/DTO/property/property.input';
+import { Properties, Property } from '../../libs/DTO/property/property';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { WithoutGuard } from '../auth/guards/without.guard';
 import { shapeIntoMongoObjectId } from '../../libs/config';
@@ -50,4 +50,14 @@ export class PropertyResolver {
   input._id = shapeIntoMongoObjectId(input._id);
   return await this.propertyService.updateProperty(memberId, input);
  }
+
+ @UseGuards(WithoutGuard)
+ @Query(() => Properties)
+ public async getProperties(
+  @Args('input') input: PropertiesInquiry,
+  @AuthMember('_id') memberId: ObjectId,
+ ): Promise<Properties> {
+  console.log('Query: getProperties');
+  return await this.propertyService.getProperties(memberId, input);
+}
 }
