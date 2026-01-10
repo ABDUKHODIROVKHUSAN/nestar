@@ -1,19 +1,37 @@
-// MIT TASK ZP
-function groupAnagrams(strs: string[]): string[][] {
-  const map: Record<string, string[]> = {};
-  for (const word of strs) {
-    const key = word.split('').sort().join('');
-    if (!map[key]) {
-      map[key] = [];
-    }
-    map[key].push(word);
-  }
-  return Object.values(map);
-}
+// MIT TASK ZQ
 
-const strs = ["eat", "tea", "tan", "ate", "nat", "bat"];
-const result = groupAnagrams(strs);
-console.log(result);
+function findDuplicates(arr: number[]): number[] {
+  const countMap = new Map<number, number>();
+  const result: number[] = [];
+  for (const num of arr) {
+    countMap.set(num, (countMap.get(num) || 0) + 1);
+  }
+  for (const [key, value] of countMap) {
+    if (value > 1) {
+      result.push(key);
+    }
+  }
+  return result;
+}
+findDuplicates([1, 2, 3, 4, 5, 4, 3, 4]);
+
+
+// MIT TASK ZP
+// function groupAnagrams(strs: string[]): string[][] {
+//   const map: Record<string, string[]> = {};
+//   for (const word of strs) {
+//     const key = word.split('').sort().join('');
+//     if (!map[key]) {
+//       map[key] = [];
+//     }
+//     map[key].push(word);
+//   }
+//   return Object.values(map);
+// }
+
+// const strs = ["eat", "tea", "tan", "ate", "nat", "bat"];
+// const result = groupAnagrams(strs);
+// console.log(result);
 
 
 
