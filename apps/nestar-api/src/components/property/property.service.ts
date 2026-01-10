@@ -9,7 +9,7 @@ import { StatisticModifier, T } from '../../libs/types/common';
 import { PropertyStatus } from '../../libs/enums/property.enum';
 import { ViewService } from '../view/view.service';
 import { ViewGroup } from '../../libs/enums/view.enum';
-import moment from 'moment';
+import * as moment from 'moment';
 import { PropertyUpdate } from '../../libs/DTO/property/property.update';
 import { lookupMember, shapeIntoMongoObjectId } from '../../libs/config';
 
