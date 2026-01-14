@@ -56,13 +56,8 @@ export class PropertyService {
   if (!targetProperty)
     throw new InternalServerErrorException(Message.NO_DATA_FOUND);
 
-  if (memberId) {
-    const viewInput = {
-      memberId: memberId,
-      viewRefId: propertyId,
-      viewGroup: ViewGroup.PROPERTY,
-    };
-
+  if (memberId) 
+    { const viewInput = {memberId: memberId,viewRefId: propertyId,viewGroup: ViewGroup.PROPERTY,};
     const newView = await this.viewService.recordView(viewInput);
 
     if (newView) {
