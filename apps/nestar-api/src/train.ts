@@ -1,19 +1,38 @@
-// MIT TASK ZQ
-
-function findDuplicates(arr: number[]): number[] {
-  const countMap = new Map<number, number>();
-  const result: number[] = [];
-  for (const num of arr) {
-    countMap.set(num, (countMap.get(num) || 0) + 1);
-  }
-  for (const [key, value] of countMap) {
-    if (value > 1) {
-      result.push(key);
+// MIT TASK ZR
+function countNumberAndLetters(str: string): { number: number; letter: number } {
+  let number = 0;
+  let letter = 0;
+  for (const char of str) {
+    if (char >= '0' && char <= '9') {
+      number++;
+    } else if (
+      (char >= 'a' && char <= 'z') ||
+      (char >= 'A' && char <= 'Z')
+    ) {
+      letter++;
     }
   }
-  return result;
+  return { number, letter };
 }
-findDuplicates([1, 2, 3, 4, 5, 4, 3, 4]);
+countNumberAndLetters("string152%¥");
+
+
+// MIT TASK ZQ
+
+// function findDuplicates(arr: number[]): number[] {
+//   const countMap = new Map<number, number>();
+//   const result: number[] = [];
+//   for (const num of arr) {
+//     countMap.set(num, (countMap.get(num) || 0) + 1);
+//   }
+//   for (const [key, value] of countMap) {
+//     if (value > 1) {
+//       result.push(key);
+//     }
+//   }
+//   return result;
+// }
+// findDuplicates([1, 2, 3, 4, 5, 4, 3, 4]);
 
 
 // MIT TASK ZP
