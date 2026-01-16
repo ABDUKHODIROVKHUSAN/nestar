@@ -6,6 +6,7 @@ import {
   PropertyType,
 } from '../../enums/property.enum';
 import { Member, TotalCounter } from '../member/member';
+import { MeLiked } from '../like/like';
 
 @ObjectType()
 export class Property {
@@ -86,6 +87,11 @@ export class Property {
 
   @Field(() => Member, { nullable: true })
   memberData?: Member;
+     
+  /** from Aggregation */
+  
+  @Field(() => [MeLiked], { nullable: true })
+  meLiked?: MeLiked[];
 }
 
 @ObjectType()
