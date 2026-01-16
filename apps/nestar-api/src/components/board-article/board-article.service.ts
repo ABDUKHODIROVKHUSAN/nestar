@@ -55,7 +55,7 @@ export class BoardArticleService {
     const viewInput = {memberId: memberId,viewRefId: articleId,viewGroup: ViewGroup.ARTICLE,};
     const newView = await this.viewService.recordView(viewInput);
     if (newView) {
-      await this.boardArticleStatsEditor({ _id: articleId,targetKey: 'articleViews',modifier: 1,});
+      await this.boardArticleStatsEditor({ _id: articleId,targetKey: 'articleViews', modifier: 1,});
       targetBoardArticle.articleViews++;
     }
       // meLiked
