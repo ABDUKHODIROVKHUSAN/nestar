@@ -89,34 +89,34 @@ export class FollowService {
 }
 
     public async getMemberFollowers(memberId: ObjectId, input: FollowInquiry): Promise<Followers> {
-  const { page, limit, search } = input;
-  if (!search?.followingId) throw new InternalServerErrorException(Message.BAD_REQUEST);
+    const { page, limit, search } = input;
+    if (!search?.followingId) throw new InternalServerErrorException(Message.BAD_REQUEST);
 
-  const match: T = { followingId: search?.followingId };
-  console.log('match:', match);
+    const match: T = { followingId: search?.followingId };
+    console.log('match:', match);
 
-  const result = await this.followModel
-    .aggregate([
-      { $match: match },
-      { $sort: { createdAt: Direction.DESC } },
-      {
-        $facet: {
-          list: [
-            { $skip: (page - 1) * limit },
-            { $limit: limit },
-            // meLiked
-            // meFollowed
-            lookupFollowerData,
-            { $unwind: '$followerData' },
-          ],
-          metaCounter: [{ $count: 'total' }],
+    const result = await this.followModel
+        .aggregate([
+        { $match: match },
+        { $sort: { createdAt: Direction.DESC } },
+        {
+            $facet: {
+            list: [
+                { $skip: (page - 1) * limit },
+                { $limit: limit },
+                // meLiked
+                // meFollowed
+                lookupFollowerData,
+                { $unwind: '$followerData' },
+            ],
+            metaCounter: [{ $count: 'total' }],
+            },
         },
-      },
-    ])
-    .exec();
+        ])
+        .exec();
 
-  if (!result.length) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
+    if (!result.length) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
 
-  return result[0];
-}
+    return result[0];
+    }
     }

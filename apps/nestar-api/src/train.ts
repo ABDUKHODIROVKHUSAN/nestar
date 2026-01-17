@@ -1,20 +1,28 @@
-// MIT TASK ZR
-function countNumberAndLetters(str: string): { number: number; letter: number } {
-  let number = 0;
-  let letter = 0;
-  for (const char of str) {
-    if (char >= '0' && char <= '9') {
-      number++;
-    } else if (
-      (char >= 'a' && char <= 'z') ||
-      (char >= 'A' && char <= 'Z')
-    ) {
-      letter++;
-    }
-  }
-  return { number, letter };
+// MIT TASK ZS
+function singleNumber(arr: number[]): number {
+  return arr.filter(x => arr.indexOf(x) === arr.lastIndexOf(x))[0];
 }
-countNumberAndLetters("string152%¥");
+
+console.log(singleNumber([7, 2, 2, 3, 3])); 
+
+
+// MIT TASK ZR
+// function countNumberAndLetters(str: string): { number: number; letter: number } {
+//   let number = 0;
+//   let letter = 0;
+//   for (const char of str) {
+//     if (char >= '0' && char <= '9') {
+//       number++;
+//     } else if (
+//       (char >= 'a' && char <= 'z') ||
+//       (char >= 'A' && char <= 'Z')
+//     ) {
+//       letter++;
+//     }
+//   }
+//   return { number, letter };
+// }
+// countNumberAndLetters("string152%¥");
 
 
 // MIT TASK ZQ

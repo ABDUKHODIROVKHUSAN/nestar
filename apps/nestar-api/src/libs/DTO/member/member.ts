@@ -2,6 +2,7 @@
     import { ObjectId } from 'mongoose';
     import { MemberAuthType, MemberStatus, MemberType } from '../../enums/member.enum';
 import { MeLiked } from '../like/like';
+import { MeFollowed } from '../follow/follow';
 
     @ObjectType()
     export class Member {
@@ -85,6 +86,9 @@ import { MeLiked } from '../like/like';
     /** from Aggregation */
     @Field(() => [MeLiked], { nullable: true })
     meLiked?: MeLiked[];
+
+    @Field(() => [MeFollowed], { nullable: true })
+    meFollowed?: MeFollowed[];
 }
 
     @ObjectType()
