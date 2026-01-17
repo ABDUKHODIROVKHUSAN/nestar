@@ -2,9 +2,9 @@ import { BadRequestException, Injectable, InternalServerErrorException } from '@
 import { InjectModel } from '@nestjs/mongoose';
 import { MemberService } from '../member/member.service';
 import { Model, ObjectId } from 'mongoose';
-import { Follower, Following, Followings } from '../../libs/DTO/follow/follow';
+import { Follower, Followers, Following, Followings } from '../../libs/DTO/follow/follow';
 import { Direction, Message } from '../../libs/enums/common.enum';
-import { lookupFollowingData } from '../../libs/config';
+import { lookupFollowerData, lookupFollowingData } from '../../libs/config';
 import { FollowInquiry } from '../../libs/DTO/follow/follow.input';
 import { T } from '../../libs/types/common';
 
@@ -88,4 +88,35 @@ export class FollowService {
     return result[0];
 }
 
+    public async getMemberFollowers(memberId: ObjectId, input: FollowInquiry): Promise<Followers> {
+  const { page, limit, search } = input;
+  if (!search?.followingId) throw new InternalServerErrorException(Message.BAD_REQUEST);
+
+  const match: T = { followingId: search?.followingId };
+  console.log('match:', match);
+
+  const result = await this.followModel
+    .aggregate([
+      { $match: match },
+      { $sort: { createdAt: Direction.DESC } },
+      {
+        $facet: {
+          list: [
+            { $skip: (page - 1) * limit },
+            { $limit: limit },
+            // meLiked
+            // meFollowed
+            lookupFollowerData,
+            { $unwind: '$followerData' },
+          ],
+          metaCounter: [{ $count: 'total' }],
+        },
+      },
+    ])
+    .exec();
+
+  if (!result.length) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
+
+  return result[0];
+}
     }
