@@ -5,7 +5,7 @@ import { AuthMember } from '../auth/decorators/authMember.decorator';
 import { ObjectId } from 'mongoose';
 import { MemberType } from '../../libs/enums/member.enum';
 import { PropertyService } from './property.service';
-import { AgentPropertiesInquiry, AllPropertiesInquiry, PropertiesInquiry, PropertyInput } from '../../libs/DTO/property/property.input';
+import { AgentPropertiesInquiry, AllPropertiesInquiry, OrdinaryInquiry, PropertiesInquiry, PropertyInput } from '../../libs/DTO/property/property.input';
 import { Properties, Property } from '../../libs/DTO/property/property';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { WithoutGuard } from '../auth/guards/without.guard';
@@ -62,6 +62,17 @@ export class PropertyResolver {
   console.log('Query: getProperties');
   return await this.propertyService.getProperties(memberId, input);
 }
+
+  @UseGuards(AuthGuard)
+  @Query((returns) => Properties)
+  public async getFavorites(
+  @Args('input') input: OrdinaryInquiry,
+  @AuthMember('_id') memberId: ObjectId,
+  ): Promise<Properties> {
+  console.log('Query: getFavorites');
+  return await this.propertyService.getFavorites(memberId, input);
+}
+
 
   @Roles(MemberType.AGENT)
   @UseGuards(RolesGuard)
