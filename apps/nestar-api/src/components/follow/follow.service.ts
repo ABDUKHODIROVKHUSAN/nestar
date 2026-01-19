@@ -4,7 +4,7 @@ import { MemberService } from '../member/member.service';
 import { Model, ObjectId } from 'mongoose';
 import { Follower, Followers, Following, Followings } from '../../libs/DTO/follow/follow';
 import { Direction, Message } from '../../libs/enums/common.enum';
-import { lookupAuthMemberLiked, lookupFollowerData, lookupFollowingData } from '../../libs/config';
+import { lookupAuthMemberFollowed, lookupAuthMemberLiked, lookupFollowerData, lookupFollowingData } from '../../libs/config';
 import { FollowInquiry } from '../../libs/DTO/follow/follow.input';
 import { T } from '../../libs/types/common';
 
@@ -74,6 +74,10 @@ export class FollowService {
                         { $limit: limit },
                         lookupAuthMemberLiked(memberId, "$followingId"),
                         // meLiked
+                          lookupAuthMemberFollowed({
+                            followerId: memberId,
+                            followingId: "$followingId",
+                        }),
                         // meFollowed
                         lookupFollowingData,
                         { $unwind: '$followingData' },
@@ -105,9 +109,13 @@ export class FollowService {
             list: [
                 { $skip: (page - 1) * limit },
                 { $limit: limit },
-                lookupAuthMemberLiked(memberId, "$followerId"),
                 // meLiked
+                lookupAuthMemberLiked(memberId, "$followerId"),
                 // meFollowed
+                lookupAuthMemberFollowed({
+                    followerId: memberId,
+                    followingId: "$followingId",
+                }),
                 lookupFollowerData,
                 { $unwind: '$followerData' },
             ],
