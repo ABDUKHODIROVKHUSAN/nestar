@@ -150,8 +150,18 @@ export const lookupFollowerData = {
 export const lookupFavorite = {
   $lookup: {
     from: 'members',
-    localFiled: 'favoriteProperty.memberId',
+    localField: 'favoriteProperty.memberId',
     foreignField: '_id',
-    as: 'favoritePoperty.memberData',
+    as: 'favoriteProperty.memberData',
   },
 }
+
+export const lookupVisit = {
+  $lookup: {
+    from: 'members',
+    localField: 'visitedProperty.memberId',
+    foreignField: '_id',
+    as: 'visitedProperty.memberData',
+  },
+};
+

@@ -1,9 +1,22 @@
-// MIT TASK ZS
-function singleNumber(arr: number[]): number {
-  return arr.filter(x => arr.indexOf(x) === arr.lastIndexOf(x))[0];
-}
+// MIT TASK ZT
 
-console.log(singleNumber([7, 2, 2, 3, 3])); 
+function firstUniqueCharIndex(str: string): number {
+  for (let i = 0; i < str.length; i++) {
+    if (str.indexOf(str[i]) === str.lastIndexOf(str[i])) {
+      return i;
+    }
+  }
+  return -1;
+}
+console.log(firstUniqueCharIndex("stamp")); 
+console.log(firstUniqueCharIndex("warcwraft")); 
+
+// MIT TASK ZS
+// function singleNumber(arr: number[]): number {
+//   return arr.filter(x => arr.indexOf(x) === arr.lastIndexOf(x))[0];
+// }
+
+// console.log(singleNumber([7, 2, 2, 3, 3])); 
 
 
 // MIT TASK ZR
