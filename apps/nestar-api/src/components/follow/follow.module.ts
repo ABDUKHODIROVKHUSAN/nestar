@@ -4,7 +4,6 @@ import { FollowResolver } from './follow.resolver';
 import { FollowService } from './follow.service';
 import FollowSchema from '../../schemas/Follow.model';
 import { AuthModule } from '../auth/auth.module';
-import { Member } from '../../libs/DTO/member/member';
 import { MemberModule } from '../member/member.module';
 
 @Module({

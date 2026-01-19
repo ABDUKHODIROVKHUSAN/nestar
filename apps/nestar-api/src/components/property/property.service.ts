@@ -11,7 +11,7 @@ import { ViewService } from '../view/view.service';
 import { ViewGroup } from '../../libs/enums/view.enum';
 import * as moment from 'moment';
 import { PropertyUpdate } from '../../libs/DTO/property/property.update';
-import { lookupMember, shapeIntoMongoObjectId } from '../../libs/config';
+import { lookupAuthMemberLiked, lookupMember, shapeIntoMongoObjectId } from '../../libs/config';
 import { LikeService } from '../like/like.service';
 import { LikeGroup } from '../../libs/enums/like.enum';
 import { LikeInput } from '../../libs/DTO/like/like.input';
@@ -161,6 +161,7 @@ public async getProperties(
           list: [
             { $skip: (input.page - 1) * input.limit },
             { $limit: input.limit },
+            lookupAuthMemberLiked(memberId),
             // meLiked
             lookupMember,
             { $unwind: '$memberData' }, // arrayni ichidan qiymat olib beradi

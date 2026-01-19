@@ -41,7 +41,7 @@ export class FollowResolver {
 @Query((returns) => Followings)
 public async getMemberFollowings(
     @Args('input') input: FollowInquiry,
-    @AuthMember('_id') memberId: ObjectId,
+    @AuthMember('_id') memberId: ObjectId, //
 ): Promise<Followings> {
     console.log('Query: getMemberFollowings');
     const { followerId } = input.search;
