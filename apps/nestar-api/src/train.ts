@@ -1,15 +1,30 @@
-// MIT TASK ZT
+// MIT TASK ZU:
 
-function firstUniqueCharIndex(str: string): number {
-  for (let i = 0; i < str.length; i++) {
-    if (str.indexOf(str[i]) === str.lastIndexOf(str[i])) {
-      return i;
+function sumOfUnique(arr: number[]): number {
+  let sum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr.indexOf(arr[i]) === arr.lastIndexOf(arr[i])) {
+      sum += arr[i];
     }
   }
-  return -1;
+  return sum;
 }
-console.log(firstUniqueCharIndex("stamp")); 
-console.log(firstUniqueCharIndex("warcwraft")); 
+
+console.log(sumOfUnique([1, 2, 3, 2]));
+
+
+// MIT TASK ZT
+
+// function firstUniqueCharIndex(str: string): number {
+//   for (let i = 0; i < str.length; i++) {
+//     if (str.indexOf(str[i]) === str.lastIndexOf(str[i])) {
+//       return i;
+//     }
+//   }
+//   return -1;
+// }
+// console.log(firstUniqueCharIndex("stamp")); 
+// console.log(firstUniqueCharIndex("warcwraft")); 
 
 // MIT TASK ZS
 // function singleNumber(arr: number[]): number {
